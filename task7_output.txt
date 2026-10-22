@@ -1,0 +1,24 @@
+=== TASK 7: Arithmetic Intensity vs. Memory Bottlenecks ===
+Student ID: 230103223
+Operating System: macOS-14.6.1-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Logical Cores: 8
+Array Size: 30,000,000 elements (float64)
+
+--- Kernel A: Memory-Bound (Vector Copy B[i] = A[i]) ---
+Cores    | Wall Time    | Speedup    | Efficiency  
+--------------------------------------------------
+1        |  3418.07 ms |     1.00x |    100.00%
+2        |  2870.79 ms |     1.19x |     59.53%
+8        |  3204.37 ms |     1.07x |     13.33%
+
+--- Kernel B: Compute-Bound (Trigonometric B[i] = sin*cos + tan) ---
+Cores    | Wall Time    | Speedup    | Efficiency  
+--------------------------------------------------
+1        |  8559.35 ms |     1.00x |    100.00%
+2        |  4899.91 ms |     1.75x |     87.34%
+8        |  4001.80 ms |     2.14x |     26.74%
+
+=== BOTTLENECK ANALYSIS ===
+Kernel A (Memory-Bound Vector Copy) stalled in scaling due to memory channel saturation.
+Reason: At 8 cores, Kernel A achieved only 13.3% parallel efficiency, whereas Kernel B maintained 26.7% efficiency.
