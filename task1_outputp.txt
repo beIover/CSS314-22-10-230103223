@@ -1,0 +1,5 @@
+Student ID: 12345678
+Logical Core Count: 8
+Mode A (Row-Major) Runtime: 202.50 ms
+Mode B (Column-Major) Runtime: 650.71 ms
+Cache Penalty Factor: 3.21x
