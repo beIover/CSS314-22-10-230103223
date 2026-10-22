@@ -1,0 +1,19 @@
+=== TASK 5: Thread Oversubscription Threshold ===
+Author: Leilima Akat (2N 07P)
+Student ID: 230103223
+Operating System: macOS-14.6.1-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Logical Cores: 8
+Total CPU Tasks: 10,000
+
+Pool Size    | Execution Time (ms)    | Speedup vs 1 Thread    | Status
+----------------------------------------------------------------------------------------
+1            |                5530.68 |                 1.00x | BASELINE
+4            |                1425.20 |                 3.88x | UNDERUTILIZED
+8            |                1630.07 |                 3.39x | UNDERUTILIZED
+16           |                1362.30 |                 4.06x | OPTIMAL (Peak Efficiency)
+32           |                1375.82 |                 4.02x | OVERSUBSCRIBED (Performance Degradation Starts)
+128          |                1421.49 |                 3.89x | OVERSUBSCRIBED (Context Switch Overhead)
+256          |                1592.37 |                 3.47x | OVERSUBSCRIBED (Context Switch Overhead)
+----------------------------------------------------------------------------------------
+Oversubscription Saturation Point: Execution time begins worsening at Pool Size = 32 due to OS thread context switching overhead.
