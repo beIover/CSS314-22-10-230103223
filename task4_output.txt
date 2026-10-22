@@ -1,0 +1,14 @@
+=== TASK 4: Work Stealing & Scheduling Under Skew ===
+Student ID: 230103223
+Operating System: macOS-14.6.1-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Workers: 4
+Total Work Items: 1000
+Dynamic Chunk Size: 5
+
+Scheduling Strategy            | Total Time (ms) | Finish Delta (ms) 
+--------------------------------------------------------------------
+Strategy A (Static Chunking)   |          362.89 |               7.38
+Strategy B (Dynamic / Queue)   |          300.79 |               8.03
+--------------------------------------------------------------------
+Thread Delta Reduction: -0.66 ms
