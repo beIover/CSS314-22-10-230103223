@@ -1,11 +1,11 @@
 === TASK 1: Hardware Probe & Serial Baseline ===
 Student ID: 230103223
-Operating System: macOS-14.6.1-x86_64-i386-64bit
+Operating System: macOS-10.16-x86_64-i386-64bit
 CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
 Logical Cores: 8
 Array Size: 20,000,000
 Data Type: float64
 Execution Mode: Serial (single thread)
-Sum: 9999730.1577865947
+Sum: 9999730.1577865873
 Standard Deviation (population): 0.2886834378
-Execution Time: 521.115 ms
+Execution Time: 559.761 ms
