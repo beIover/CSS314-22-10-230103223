@@ -1,0 +1,14 @@
+=== TASK 2: Multi-Core Scaling vs. Amdahl's Law ===
+Student ID: 230103223
+Operating System: macOS-14.6.1-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Logical Cores: 8
+Array Size: 20,000,000
+
+Cores    | Wall Time    | Speedup S(p)   | Amdahl Upper Bound
+------------------------------------------------------------
+1        |   522.46 ms |         1.00x |             1.00x
+2        |   390.30 ms |         1.34x |             1.90x
+4        |   254.41 ms |         2.05x |             3.48x
+8        |   394.05 ms |         1.33x |             5.93x
+16       |   703.59 ms |         0.74x |             9.14x
