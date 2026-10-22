@@ -1,0 +1,15 @@
+=== TASK 2: Pseudo-Random Generator State Bottleneck ===
+Author: Leilima Akat (2N 07P)
+Student ID: 230103223
+Operating System: macOS-10.16-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Logical Cores: 8
+Total Sample Points: 40,000,000
+Threads: 4
+
+PRNG Mode                      | Computed pi  | Abs Error    | Wall Time   
+------------------------------------------------------------------------
+1. Shared PRNG (Mutex Guarded) |     3.141863 | 2.702464e-04 |   560.17 ms
+2. Independent PRNG (Isolated) |     3.141576 | 1.665359e-05 |  1325.71 ms
+------------------------------------------------------------------------
+Speedup Factor (Shared / Independent): 0.42x
