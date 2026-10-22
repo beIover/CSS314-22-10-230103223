@@ -1,0 +1,18 @@
+=== TASK 6: Synchronization Cost & Data Loss ===
+Student ID: 230103223
+Operating System: macOS-14.6.1-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Threads: 4
+Increments per Thread: 2,000,000
+
+Metric                              | Value               
+----------------------------------------------------------
+Expected Final Value                |            8,000,000
+Unsynchronized Final Value          |            2,766,736
+Synchronized Final Value            |            8,000,000
+Lost Updates                        |            5,233,264
+Data Loss Percentage                |               65.42%
+----------------------------------------------------------
+Unsynchronized Execution Time       |              8.94 ms
+Synchronized Execution Time         |            403.31 ms
+Synchronization Time Penalty        |               45.11x slowdown
