@@ -1,0 +1,16 @@
+=== TASK 5: The Overhead Crossover Point ===
+Student ID: 230103223
+Operating System: macOS-14.6.1-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Logical Cores: 8
+
+Array Size (N)  | Serial (ms)  | Parallel (ms) | Parallel Faster?
+-----------------------------------------------------------------
+100             |       0.0729 |       1.5340 |        NO       
+1,000           |       0.0294 |       0.6162 |        NO       
+10,000          |       0.1058 |       0.7132 |        NO       
+100,000         |       4.2066 |       0.8923 |       YES       
+1,000,000       |       9.7074 |       5.5503 |       YES       
+10,000,000      |     140.9953 |      66.3383 |       YES       
+-----------------------------------------------------------------
+Exact Crossover Point: Parallel execution shifts from SLOWER to FASTER between N = 10,000 and N = 100,000
