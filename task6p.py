@@ -1,4 +1,3 @@
-
 # Author: Leilima Akat (2N 07P)
 # Student ID: 230103223
 
@@ -31,6 +30,10 @@ def main():
 
     compiler = "clang" if platform.system() == "Darwin" else "gcc"
 
+    # Remove old binary if present to force fresh compilation
+    if os.path.exists("task6_bench"):
+        os.remove("task6_bench")
+
     compile_cmd = [compiler, "-O2", "-pthread", "task6.c", "-o", "task6_bench"]
     comp_res = subprocess.run(compile_cmd, capture_output=True, text=True)
 
@@ -39,7 +42,13 @@ def main():
         return
 
     run_res = subprocess.run(["./task6_bench"], capture_output=True, text=True)
-    time_mutex_ms, time_cas_ms = map(float, run_res.stdout.strip().split(","))
+    raw_output = run_res.stdout.strip().split(",")
+
+    if len(raw_output) >= 2:
+        time_mutex_ms = float(raw_output[0])
+        time_cas_ms = float(raw_output[1] if len(raw_output) == 2 else raw_output[2])
+    else:
+        raise ValueError(f"Unexpected output format from binary: '{run_res.stdout.strip()}'")
 
     mutex_ops_sec = TOTAL_OPS / (time_mutex_ms / 1000.0)
     cas_ops_sec = TOTAL_OPS / (time_cas_ms / 1000.0)

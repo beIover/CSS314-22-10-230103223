@@ -1,0 +1,15 @@
+=== TASK 6: Atomic CAS vs. OS Mutex Under Heavy Contention ===
+Author: Leilima Akat (2N 07P)
+Student ID: 230103223
+Operating System: macOS-10.16-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Threads: 8
+Increments per Thread: 1,000,000
+Total Operations: 8,000,000
+
+Synchronization Primitive        | Execution Time (ms)  | Throughput (ops/sec)     
+----------------------------------------------------------------------------------
+1. OS Mutex / Heavyweight Lock   |             469.87 ms |           17,025,985.91 ops/sec
+2. Hardware Atomic CAS / Fetch-Add |             161.33 ms |           49,587,801.40 ops/sec
+----------------------------------------------------------------------------------
+Throughput Ratio (CAS / Mutex): 2.91x speedup

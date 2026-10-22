@@ -2,28 +2,27 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <time.h>
+#include <stdatomic.h>
 
-#define NUM_THREADS 4
-#define INCREMENTS 2000000ULL
+#define NUM_THREADS 8
+#define INCREMENTS_PER_THREAD 1000000ULL
 
-volatile long long unsynchronized_counter = 0;
+long long mutex_counter = 0;
 pthread_mutex_t lock = PTHREAD_MUTEX_INITIALIZER;
-long long synchronized_counter = 0;
+_Atomic long long atomic_counter = 0;
 
-// 1. Unsynchronized Worker (Exposes Race Conditions)
-void* worker_unsafe(void* arg) {
-    for (long long i = 0; i < INCREMENTS; i++) {
-        unsynchronized_counter++;
+void* worker_mutex(void* arg) {
+    for (long long i = 0; i < INCREMENTS_PER_THREAD; i++) {
+        pthread_mutex_lock(&lock);
+        mutex_counter++;
+        pthread_mutex_unlock(&lock);
     }
     return NULL;
 }
 
-// 2. Synchronized Worker (Uses Mutex Lock)
-void* worker_sync(void* arg) {
-    for (long long i = 0; i < INCREMENTS; i++) {
-        pthread_mutex_lock(&lock);
-        synchronized_counter++;
-        pthread_mutex_unlock(&lock);
+void* worker_cas(void* arg) {
+    for (long long i = 0; i < INCREMENTS_PER_THREAD; i++) {
+        atomic_fetch_add(&atomic_counter, 1);
     }
     return NULL;
 }
@@ -36,28 +35,19 @@ int main() {
     pthread_t threads[NUM_THREADS];
     struct timespec start, end;
 
-    // Unsynchronized Benchmark
     clock_gettime(CLOCK_MONOTONIC, &start);
-    for (int i = 0; i < NUM_THREADS; i++) {
-        pthread_create(&threads[i], NULL, worker_unsafe, NULL);
-    }
-    for (int i = 0; i < NUM_THREADS; i++) {
-        pthread_join(threads[i], NULL);
-    }
+    for (int i = 0; i < NUM_THREADS; i++) pthread_create(&threads[i], NULL, worker_mutex, NULL);
+    for (int i = 0; i < NUM_THREADS; i++) pthread_join(threads[i], NULL);
     clock_gettime(CLOCK_MONOTONIC, &end);
-    double time_unsafe = get_time_ms(start, end);
+    double time_mutex_ms = get_time_ms(start, end);
 
-    // Synchronized Benchmark
+    atomic_counter = 0;
     clock_gettime(CLOCK_MONOTONIC, &start);
-    for (int i = 0; i < NUM_THREADS; i++) {
-        pthread_create(&threads[i], NULL, worker_sync, NULL);
-    }
-    for (int i = 0; i < NUM_THREADS; i++) {
-        pthread_join(threads[i], NULL);
-    }
+    for (int i = 0; i < NUM_THREADS; i++) pthread_create(&threads[i], NULL, worker_cas, NULL);
+    for (int i = 0; i < NUM_THREADS; i++) pthread_join(threads[i], NULL);
     clock_gettime(CLOCK_MONOTONIC, &end);
-    double time_sync = get_time_ms(start, end);
+    double time_cas_ms = get_time_ms(start, end);
 
-    printf("%lld,%lld,%.2f,%.2f\n", unsynchronized_counter, synchronized_counter, time_unsafe, time_sync);
+    printf("%.2f,%.2f\n", time_mutex_ms, time_cas_ms);
     return 0;
 }
