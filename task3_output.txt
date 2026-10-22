@@ -1,0 +1,13 @@
+=== TASK 3: Cache Line Contention (False Sharing) ===
+Student ID: 230103223
+Operating System: macOS-14.6.1-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Worker Threads (Cores): 8
+Iterations per Thread: 50,000,000
+
+Benchmark Mode                   | Wall Time   
+------------------------------------------------
+Unpadded Shared (False Sharing)  |   372.94 ms
+Local Accumulation / Padded      |   103.44 ms
+------------------------------------------------
+Execution Ratio (Unpadded / Local): 3.61x
