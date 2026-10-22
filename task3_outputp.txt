@@ -1,0 +1,11 @@
+=== TASK 3: Parallel Prefix Scan (Inclusive) ===
+Author: Leilima Akat (2N 07P)
+Student ID: 230103223
+Operating System: macOS-10.16-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Logical Cores: 8
+Array Size: 2,000,000 integers (values 1 to 10)
+
+Serial Time     | Parallel Time   | Speedup    | Verification
+--------------------------------------------------------------
+       11.55 ms |        23.56 ms |     0.49x | PASS
