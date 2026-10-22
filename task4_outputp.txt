@@ -1,0 +1,12 @@
+=== TASK 4: Inter-Process Memory Transfer Overhead ===
+Author: Leilima Akat (2N 07P)
+Student ID: 230103223
+Operating System: macOS-14.6.1-x86_64-i386-64bit
+CPU Model: Intel(R) Core(TM) i5-8257U CPU @ 1.40GHz
+Logical Cores: 8
+
+Array Size (N)  | Path A - IPC Pipe (ms) | Path B - Zero-Copy SHM (ms) | Speedup   
+--------------------------------------------------------------------------------
+100,000         |                 182.89 |                    177.96 |     1.03x
+1,000,000       |                 222.08 |                    171.81 |     1.29x
+10,000,000      |                4775.04 |                    235.55 |    20.27x
